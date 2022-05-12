@@ -40,6 +40,17 @@ app.use('/login', (req, res) => {
   });
 });
 
+app.use('/class_display', (req, res) => {
+  console.log(req.body);
+  let target = classes.filter(x => (x.id == req.body.id))[0];
+  console.log(target);
+  let target_users = users.filter(x => (target.users.includes(x)));
+  res.send({
+    class_info: target,
+    users: target_users
+  })
+});
+
 app.use('/class_search',(req, res) => {
   console.log(req.body);
   res.send({
