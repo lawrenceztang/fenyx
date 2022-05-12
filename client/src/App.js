@@ -7,6 +7,7 @@ import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import { useState } from 'react';
 import useToken from './useToken';
+import ClassPage from './pages/Class'
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile/>} />
           <Route path="login" element={<Login setToken={setToken}/>} />
+          <Route path= "class/:id" element={<ClassPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>
