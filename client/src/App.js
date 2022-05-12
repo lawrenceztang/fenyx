@@ -6,19 +6,11 @@ import Layout from "./pages/Layout";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import { useState } from 'react';
+import useToken from './useToken';
 
-function setToken(userToken) {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-}
-
-function getToken() {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token
-}
 
 function App() {
-  const [token, setToken] = useState();
+  const {token, setToken, deleteToken} = useToken();
 
   // if(!token) {
   //   return <Login setToken={setToken} />
@@ -27,10 +19,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/" element={<Layout />}>
+        <Route exact path="/" element={<Layout token={token} deleteToken={deleteToken}/>}>
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile/>} />
-          <Route path="login" element={<Login/>} />
+          <Route path="login" element={<Login setToken={setToken}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

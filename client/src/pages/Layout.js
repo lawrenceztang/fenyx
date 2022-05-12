@@ -1,6 +1,13 @@
 import { Outlet, Link } from "react-router-dom";
 
-const Layout = () => {
+const Layout = ({token, deleteToken}) => {
+  let login_signout;
+  if(!token){
+            login_signout = <Link to="/login">Login/Register</Link>
+          }
+          else{
+            login_signout = <Link to="/" onClick={deleteToken}>Sign Out</Link>
+          }
   return (
     <>
       <nav>
@@ -12,7 +19,7 @@ const Layout = () => {
             <Link to="/profile">My Profile</Link>
           </li>
           <li>
-            <Link to="/login">Login/Register</Link>
+            {login_signout}
           </li>
         </ul>
       </nav>

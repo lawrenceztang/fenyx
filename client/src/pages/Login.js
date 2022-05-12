@@ -12,7 +12,8 @@ async function loginUser(credentials) {
    .then(data => data.json())
 }
 
-const Login = ({setToken}) => {
+const Login = ({token, setToken}) => {
+	var alert;
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 
@@ -35,12 +36,20 @@ const Login = ({setToken}) => {
 		setPassword(event.target.value)
 	}
 
+	if(token){
+		alert = 1;
+	}
+	else{
+		alert = null;
+	}
+
 	// const handleSubmit = (event) => {
 	// 	console.log("Logging in with " + email + " and password" + password);
 	// 	event.preventDefault();
 	// }
 	return(
 		<div>
+			{alert && <h1>Token Received</h1> }
 			<h1>Login Page</h1>
 			<form>
 				<div>
@@ -57,10 +66,14 @@ const Login = ({setToken}) => {
 					 onChange={handlePasswordChange}
 					/>
 				</div>
-				<button type="submit">Search </button>
+				<button type="submit" onClick={handleSubmit}>Search </button>
 			</form>
 		</div>
 		)
 }
+
+// Login.propTypes = {
+//   setToken: PropTypes.func.isRequired
+// }
 
 export default Login;
