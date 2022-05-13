@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Layout token={token} deleteToken={deleteToken}/>}>
           <Route index element={<Home />} />
-          <Route path="profile" element={<Profile/>} />
+          <Route path="profile/:id" element={<Profile/>} />
           <Route path="login" element={<Login setToken={setToken}/>} />
           <Route path= "class/:id" element={<ClassPage/>} />
         </Route>
