@@ -18,13 +18,13 @@ const classes = [
     id: 0,
     name: "CMSC 15200",
     professor: "Zach Barnes",
-    users: ["0"]
+    users: [0]
   },
   {
     id: 1,
     name: "CMSC 22000",
     professor: "Blase Ur",
-    users: ["0"]
+    users: [0]
   }
 ];
 
@@ -44,7 +44,7 @@ app.use('/class_display', (req, res) => {
   console.log(req.body);
   let target = classes.filter(x => (x.id == req.body.id))[0];
   console.log(target);
-  let target_users = users.filter(x => (target.users.includes(x)));
+  let target_users = users.filter(x => (target.users.includes(x.id)));
   res.send({
     class_info: target,
     users: target_users
@@ -60,7 +60,7 @@ app.use('/class_search',(req, res) => {
 
 app.use('/profile', (req, res) => {
   console.log(req.body);
-  user = users.filter(x => (x.email == req.body.id))[0];
+  user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
   if(user){
     res.send({
       id: user.id,
