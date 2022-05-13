@@ -50,7 +50,7 @@ const Home = () =>{
 				<div>
 					<ul>
 						{search_result.map(x => 
-							<li key={x.id}><Link to="/"> Name: {x.name}, Professor {x.professor} </Link></li>
+							<li key={x.id}><Link to={"/class/" + x.id}> Name: {x.name}, Professor {x.professor} </Link></li>
 							)}
 					</ul>
 				</div>
