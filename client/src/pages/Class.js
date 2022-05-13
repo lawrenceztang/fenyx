@@ -1,38 +1,42 @@
 import {useParams} from "react-router-dom";
 import { useState, useEffect } from 'react';
-
-async function retrieveClassInfo(params) {
- return fetch('http://localhost:3001/class_display', {
-   method: 'POST',
-   headers: {
-     'Content-Type': 'application/json'
-   },
-   body: JSON.stringify(params)
- })
-   .then(data => data.json())
-}
+import { Outlet, Link } from "react-router-dom";
 
 
-//Implement loading indicator: 
-//https://www.basefactor.com/react-how-to-display-a-loading-indicator-on-fetch-calls
 const ClassPage = () => {
 	let {id} = useParams();
-	const [class_info, setClassInfo] = useState(null);
+	let class_info;
+	let users;
+	const [info, setClassInfo] = useState(null);
 
 	useEffect(() => {
 		fetch('http://localhost:3001/class_display', {
 			   method: 'POST',
 			   headers: {
 			     'Content-Type': 'application/json'
-			   },body: JSON.stringify(id)
- 			}).then(data => setClassInfo(data.json()))
-	});
+			   },body: JSON.stringify({id})
+ 			}).then((res) => res.json())
+      		  .then((data) => setClassInfo(data));
+	},[]);
 
-	if(class_info == null){
+	if(info == null){
+		//console.log(class_info)
 		return <h1>Still Loading</h1>;
 	}
 	else{
-		return <h1> Found </h1>;
+		console.log(info);
+		class_info = info.class_info;
+		users = info.users;
+		return (<div>
+					<h1> {info.class_info.name} </h1>
+					<ul>
+						{users.map(x =>
+							<li key={x.id}><Link to={"/profile/" + x.id}> 
+							{x.name}
+							</Link> </li>)}
+					</ul>
+				</div>
+				);
 	}
 };
 
