@@ -6,8 +6,15 @@ var bodyParser = require('body-parser')
 
 const users = [
   {
-    id: 0,
+    id: 1,
     name: "William Wang",
+    email: "william@uchicago.edu",
+    password: "123456",
+    classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
+  },
+  {
+    id: 2,
+    name: "Oliver",
     email: "william@uchicago.edu",
     password: "123456",
     classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
@@ -18,13 +25,19 @@ const classes = [
     id: 0,
     name: "CMSC 15200",
     professor: "Zach Barnes",
-    users: [0]
+    users: [1]
+  },
+  {
+    id: 0,
+    name: "CMSC 15200",
+    professor: "Bach Barnes",
+    users: [1]
   },
   {
     id: 1,
     name: "CMSC 22000",
     professor: "Blase Ur",
-    users: [0]
+    users: [1]
   }
 ];
 
@@ -36,7 +49,8 @@ app.use('/login', (req, res) => {
   console.log(req.body);
   users.push({email: req.body.email, password: req.body.password})
   res.send({
-    token: 'test123'
+    token: 'test123',
+    id: 2
   });
 });
 
