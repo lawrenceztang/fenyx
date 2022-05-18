@@ -28,13 +28,13 @@ const classes = [
     users: [1]
   },
   {
-    id: 0,
+    id: 1,
     name: "CMSC 15200",
     professor: "Bach Barnes",
     users: [1]
   },
   {
-    id: 1,
+    id: 2,
     name: "CMSC 22000",
     professor: "Blase Ur",
     users: [1]

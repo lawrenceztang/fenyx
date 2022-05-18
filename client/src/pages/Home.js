@@ -65,7 +65,7 @@ const Home = () =>{
 			  </div>
 			  }
 				<div class="input-group" style={{justifyContent: "center"}}>
-					<div class="form-outline" style={{width: "75%"}}>
+					<div class="form-outline" style={{width: "50%"}}>
 						<input placeholder="Search Class" id="searchForm" class="form-control"
 						 value={search_input}
 						 onChange={handleSearchChange}
