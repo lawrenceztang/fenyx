@@ -14,8 +14,8 @@ const Layout = ({token, deleteToken}) => {
           }
 
   return(
-    <div style={{height: "90vh"}}>
-    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <div style={{height: "93vh"}}>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
