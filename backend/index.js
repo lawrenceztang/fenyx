@@ -69,11 +69,13 @@ app.use('/login', (req, res) => {
 
 app.use('/class_display', (req, res) => {
   console.log("Request Information: " + req.body.id);
-  course = courseLookup.getClassDetails(db, req.body.id)
-  console.log(course);
-  res.send({
-    class_info: course,
-    users: users
+  courseLookup.getClassDetails(db, req.body.id)
+  .then((result) => {
+    console.log("Express receives: " + JSON.stringify(result) );
+      res.send({
+      class_info: result,
+      users: users
+    })
   })
   // let target = classes.filter(x => (x.id == req.body.id))[0];
   // console.log(target);

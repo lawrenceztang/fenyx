@@ -50,15 +50,17 @@ const getSearchQuery = (db, query) => {
 //returns course information matching index
 const getClassDetails = (db,id) => {
 	var sql = "SELECT * FROM courses WHERE `index` = 0";
-	return db.get(sql, (error, row) => {
-		if(error) {
-			console.log("error");
-			throw error;
-		}
-		else{
-			//console.log(row);
-			return row;
-		}
+	return new Promise((resolve,reject) => {
+			db.get(sql, (error, row) => {
+			if(error) {
+				console.log("error");
+				reject(error);
+			}
+			else{
+				console.log("Backend has: " + JSON.stringify(row) );
+				resolve(row);
+			}
+		})
 	})
 }
 

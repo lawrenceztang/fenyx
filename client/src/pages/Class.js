@@ -24,11 +24,11 @@ const ClassPage = () => {
 		return <h1>Still Loading</h1>;
 	}
 	else{
-		console.log("Class Info: " + info.class_info);
+		console.log("Class Info: " + JSON.stringify(info.class_info) );
 		class_info = info.class_info;
 		users = info.users;
 		return (<div>
-					<h1> {info.class_info.class_title} </h1>
+					<h1> {info.class_info.title} </h1>
 					<ul>
 						{users.map(x =>
 							<li key={x.id}><Link to={"/profile/" + x.id}> 
