@@ -38,12 +38,10 @@ const Home = () =>{
 	    const result = await lookUpClasses({
 	      search_input
 	    });
-	    console.log(result.classes[0]);
 	    setResult(result.classes);
 	  };
 
 	const handleSearchChange = (event) => {
-		console.log(event.target.value);
 		setInput(event.target.value);
 	};
 
@@ -53,7 +51,9 @@ const Home = () =>{
 	// 	console.log("Searching " + search_input);
 	// 	event.preventDefault();
 	// }
-
+	if(search_result){
+		console.log("Search result: " + search_result[0]);
+	}
 	return (<div style={container}>
 				{!search_result && 
 				<div id="title" style={header}>
@@ -61,7 +61,7 @@ const Home = () =>{
 				</div>
 			  }
 			  {search_result && 
-			  <div id="filler" style={{height: "5%"}}>
+			  <div id="filler" style={{height: "5%", margin: "1%"}}>
 			  </div>
 			  }
 				<div class="input-group" style={{justifyContent: "center"}}>
@@ -71,12 +71,25 @@ const Home = () =>{
 						 onChange={handleSearchChange}
 						/>
 					</div>
-						<button type="submit" onClick={handleSubmit}>Search </button>
+						<button class="btn" style={{background: "deepskyblue"}}
+						type="submit" onClick={handleSubmit}>Search </button>
 				</div>
 				{search_result && 
-				<div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center"}}>
+				<div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center",
+										 justifyContent: "space-around"}}>
 							{search_result.map(x => 
-								<div key={x.id}><Link to={"/class/" + x.id}> Name: {x.name}, Professor {x.professor} </Link></div>
+								<div key={x.id} style={{margin: "1%", minWidth: "75%"}}
+										 class="container-md card">
+									<Link to={"/class/" + x.id}> 
+									{"CMSC " + x.class_num + " "+ x.class_title}</Link>
+									<p>
+									{"Instructors: " + x.instructors}
+									</p>
+									{(x.cross_listings != 'None') && 
+									<p> {"Cross Listed as: " + x.cross_listings}
+									</p>
+								   }
+								</div>
 								)}
 				</div>
 			 }
