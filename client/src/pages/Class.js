@@ -19,16 +19,16 @@ const ClassPage = () => {
       		  .then((data) => setClassInfo(data));
 	},[]);
 
-	if(info == null){
+	if(info == null || info.class_info == null){
 		//console.log(class_info)
 		return <h1>Still Loading</h1>;
 	}
 	else{
-		console.log(info);
+		console.log("Class Info: " + info.class_info);
 		class_info = info.class_info;
 		users = info.users;
 		return (<div>
-					<h1> {info.class_info.name} </h1>
+					<h1> {info.class_info.class_title} </h1>
 					<ul>
 						{users.map(x =>
 							<li key={x.id}><Link to={"/profile/" + x.id}> 

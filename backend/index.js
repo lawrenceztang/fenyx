@@ -1,8 +1,21 @@
 const express = require('express');
+const sqlite3 = require('sqlite3').verbose();
 const app = express();
 const cors = require('cors');
 const port = 3001;
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var courseLookup = require('./courseLookup.js');
+var userLookup = require('./userLookup.js');
+
+//database path
+db_name = './courses.db';
+
+const db = new sqlite3.Database(db_name, err => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log("Successful connection to the database 'courses.db'");
+});
 
 const users = [
   {
@@ -55,21 +68,42 @@ app.use('/login', (req, res) => {
 });
 
 app.use('/class_display', (req, res) => {
-  console.log(req.body);
-  let target = classes.filter(x => (x.id == req.body.id))[0];
-  console.log(target);
-  let target_users = users.filter(x => (target.users.includes(x.id)));
+  console.log("Request Information: " + req.body.id);
+  course = courseLookup.getClassDetails(db, req.body.id)
+  console.log(course);
   res.send({
-    class_info: target,
-    users: target_users
+    class_info: course,
+    users: users
   })
+  // let target = classes.filter(x => (x.id == req.body.id))[0];
+  // console.log(target);
+  // let target_users = users.filter(x => (target.users.includes(x.id)));
+  // res.send({
+  //   class_info: target,
+  //   users: target_users
+  // })
 });
 
+/*course lookup route from home page and parses through array with 
+following class info:
+{
+  id: row.index,
+  class_title: row.title,
+  class_num: row.num,
+  instructors: row.fullNameInstructors,
+  cross_listings: row.crossListings
+}
+*/
 app.use('/class_search',(req, res) => {
   console.log(req.body);
-  res.send({
-    classes: classes.filter(x => (x.name == req.body.search_input))
-  })
+  courseLookup.getSearchQuery(db, req.body.search_input)
+  .then((result) =>{
+    console.log(result);
+    res.send({
+    classes: result
+    //classes.filter(x => (x.name == req.body.search_input))
+    })
+  });
 });
 
 app.use('/profile', (req, res) => {
