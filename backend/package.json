@@ -3,7 +3,8 @@
     "body-parser": "^1.20.0",
     "bootstrap": "^5.1.3",
     "cors": "^2.8.5",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "sqlite3": "^5.0.8"
   },
   "name": "less_toxic_facebook",
   "description": "",
