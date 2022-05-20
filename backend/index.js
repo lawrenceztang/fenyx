@@ -97,7 +97,7 @@ following class info:
 }
 */
 app.use('/class_search',(req, res) => {
-  console.log(req.body);
+  console.log(req.body.search_input);
   courseLookup.getSearchQuery(db, req.body.search_input)
   .then((result) =>{
     console.log(result);

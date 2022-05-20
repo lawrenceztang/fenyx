@@ -28,8 +28,10 @@ const getSearchQuery = (db, query) => {
 		var sql = "SELECT * FROM courses";
 
 		//Input min_distance
-		const min_distance = 2;
 		return db.each(sql, (error, row) => {
+            const min_distance = 25/query.length + .95*(row.title.length - query.length) 
+            console.log(min_distance);
+            console.log( levenshteinDistance(row.title, query))
 			if (error) {reject(error)};
 			var dist = levenshteinDistance(row.title, query)
 			if( dist <= min_distance){
