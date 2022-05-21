@@ -7,6 +7,19 @@ var bodyParser = require('body-parser');
 var courseLookup = require('./courseLookup.js');
 var userLookup = require('./userLookup.js');
 
+const p1 = 109;
+const p2 = 198733;
+
+function hash(s){
+    hash_val = 0;
+    for(var i = 0; i < s.length; i++){
+        hash_val += s.charCodeAt(i);
+        hash_val *= p1;
+        hash_val %= p2;
+    }
+    return hash_val
+}
+
 //database path
 db_name = './courses.db';
 
@@ -15,12 +28,6 @@ const db = new sqlite3.Database(db_name, err => {
     return console.error(err.message);
   }
   console.log("Successful connection to the database 'courses.db'");
-});
-
-var users = [];
-
-userLookup.getUsers(db).then((result) => {
-    users = result;
 });
 
 const classes = [
@@ -48,25 +55,31 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use('/login', (req, res) => {
-  console.log("Current users:" + users.map( x => [x.email, x.password]));
   console.log(req.body);
-  users.push({email: req.body.email, password: req.body.password})
-  res.send({
-    token: 'test123',
-    id: 2
+  const email = req.body.email;
+  userLookup.getUsers(db).then((result) => {
+      users = result;
+      console.log(email);
+      //console.log("Current users:" + users.map( x => [x.email, x.password]));
+      //users.push({email: req.body.email, password: req.body.password})
+      res.send({
+        token: hash(email),
+      });
   });
 });
 
 app.use('/class_display', (req, res) => {
-  console.log("Request Information: " + req.body.id);
-  courseLookup.getClassDetails(db, req.body.id)
-  .then((result) => {
-    console.log("Express receives: " + JSON.stringify(result) );
-      res.send({
-      class_info: result,
-      users: users
-    })
-  })
+  userLookup.getUsers(db).then((result) => {
+      console.log("Request Information: " + req.body.id);
+      courseLookup.getClassDetails(db, req.body.id)
+      .then((result) => {
+        console.log("Express receives: " + JSON.stringify(result) );
+          res.send({
+          class_info: result,
+          users: users
+        })
+      })
+  });
   // let target = classes.filter(x => (x.id == req.body.id))[0];
   // console.log(target);
   // let target_users = users.filter(x => (target.users.includes(x.id)));

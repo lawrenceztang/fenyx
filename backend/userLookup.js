@@ -14,7 +14,7 @@ function hash(s){
 const addUser = (db, inputs) => {
     console.log(inputs);
     const query_string = 'INSERT INTO users(id, name, email, password, classes) VALUES(?,?,?,?,?)';
-    const id = hash(inputs.name + inputs.email);
+    const id = hash(inputs.email);
     const data = [id, inputs.name, inputs.email, inputs.password, ""];
     console.log(data);
     db.run(query_string, data, (err) => {

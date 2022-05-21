@@ -35,6 +35,11 @@ const ClassPage = () => {
 							{x.name}
 							</Link> </li>)}
 					</ul>
+                    <form action="/add_class" method="post">
+                        <input type="hidden" value={sessionStorage.token}/>
+                        <button type="submit">Add class</button>
+
+                    </form>
 				</div>
 				);
 	}
