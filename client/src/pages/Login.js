@@ -8,7 +8,7 @@ async function loginUser(credentials) {
    headers: {
      'Content-Type': 'application/json'
    },
-   body: JSON.stringify(credentials.token)
+   body: JSON.stringify(credentials)
  })
    .then(data => data.json())
 }

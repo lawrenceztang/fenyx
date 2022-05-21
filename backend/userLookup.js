@@ -27,7 +27,7 @@ const addUser = (db, inputs) => {
 const addClasses = (db, inputs) => {
     console.log(inputs);
     const query_string = 'UPDATE users SET classes=classes || ? WHERE id=?';
-    const data = [inputs.classes, id];
+    const data = [inputs.classes, inputs.id];
     console.log(data);
     db.run(query_string, data, (err) => {
         if(err) {

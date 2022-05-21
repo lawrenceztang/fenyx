@@ -57,19 +57,15 @@ app.use(bodyParser.json())
 app.use('/login', (req, res) => {
   console.log(req.body);
   const email = req.body.email;
-  userLookup.getUsers(db).then((result) => {
-      users = result;
-      console.log(email);
-      //console.log("Current users:" + users.map( x => [x.email, x.password]));
-      //users.push({email: req.body.email, password: req.body.password})
-      res.send({
-        token: hash(email),
-      });
-  });
+  console.log(email);
+  //console.log("Current users:" + users.map( x => [x.email, x.password]));
+  //users.push({email: req.body.email, password: req.body.password})
+  res.send({'token':hash(email)});
 });
 
 app.use('/class_display', (req, res) => {
   userLookup.getUsers(db).then((result) => {
+      users = result;
       console.log("Request Information: " + req.body.id);
       courseLookup.getClassDetails(db, req.body.id)
       .then((result) => {
@@ -140,7 +136,8 @@ app.use('/add_user', (req, res) => {
 })
 
 app.use('/add_classes', (req, res) => {
-   userLookup.addClasses(db,req.body.inputs)
+   const payload = {"id": req.body.info.id, "classes": req.body.info.class_info.sectionID +','}
+   userLookup.addClasses(db,payload)
 })
 
 
