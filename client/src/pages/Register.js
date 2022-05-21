@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 async function registerUser(params){
  console.log(params)
- return fetch('http://localhost:3001/add_user', {
+ return fetch('/add_user', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json'

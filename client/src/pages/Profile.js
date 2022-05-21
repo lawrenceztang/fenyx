@@ -10,7 +10,7 @@ const Profile = () => {
 	const [info, setProfileInfo] = useState(null);
 
 	useEffect(() => {
-		fetch('http://localhost:3001/profile', {
+		fetch('/profile', {
 			   method: 'POST',
 			   headers: {
 			     'Content-Type': 'application/json'
