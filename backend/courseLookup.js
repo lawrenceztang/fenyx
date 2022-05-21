@@ -51,7 +51,7 @@ const getSearchQuery = (db, query) => {
 }
 //returns course information matching index
 const getClassDetails = (db,id) => {
-	var sql = "SELECT * FROM courses WHERE `index` = 0";
+	var sql = "SELECT * FROM courses WHERE `index` = " + id;
 	return new Promise((resolve,reject) => {
 			db.get(sql, (error, row) => {
 			if(error) {
