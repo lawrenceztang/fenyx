@@ -17,7 +17,6 @@ const db = new sqlite3.Database(db_name, err => {
   console.log("Successful connection to the database 'courses.db'");
 });
 
-var 
 var users = [];
 
 userLookup.getUsers(db).then((result) => {
