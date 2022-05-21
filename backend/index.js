@@ -7,6 +7,19 @@ var bodyParser = require('body-parser');
 var courseLookup = require('./courseLookup.js');
 var userLookup = require('./userLookup.js');
 
+const p1 = 109;
+const p2 = 198733;
+
+function hash(s){
+    hash_val = 0;
+    for(var i = 0; i < s.length; i++){
+        hash_val += s.charCodeAt(i);
+        hash_val *= p1;
+        hash_val %= p2;
+    }
+    return hash_val
+}
+
 //database path
 db_name = './courses.db';
 
@@ -52,7 +65,7 @@ app.use('/login', (req, res) => {
   console.log(req.body);
   users.push({email: req.body.email, password: req.body.password})
   res.send({
-    token: 'test123',
+    token: hash(email),
     id: 2
   });
 });
