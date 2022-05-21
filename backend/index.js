@@ -17,14 +17,6 @@ const db = new sqlite3.Database(db_name, err => {
   console.log("Successful connection to the database 'courses.db'");
 });
 
-var users = [];
-
-userLookup.getUsers(db).then((result) => {
-    users = result;
-    console.log('returned users: ' + users)
-});
-
-console.log('users: ' + users)
 const classes = [
   {
     id: 0,
@@ -50,12 +42,15 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use('/login', (req, res) => {
-  console.log("Current users:" + users.map( x => [x.email, x.password]));
-  console.log(req.body);
-  users.push({email: req.body.email, password: req.body.password})
-  res.send({
-    token: 'test123',
-    id: 74334 
+  userLookup.getUsers(db).then((result) => {
+      users = result;
+      console.log("Current users:" + users.map( x => [x.email, x.password]));
+      console.log(req.body);
+      users.push({email: req.body.email, password: req.body.password})
+      res.send({
+        token: 'test123',
+        id: 74334 
+      });
   });
 });
 
