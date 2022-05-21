@@ -1,5 +1,7 @@
 import { useState, useEffect  } from 'react';
 import {useParams} from "react-router-dom";
+import { Grid } from 'gridjs-react';
+
 
 const Profile = () => {
 	let {id} = useParams();
@@ -22,12 +24,25 @@ const Profile = () => {
 		return <h1>Still Loading</h1>;
 	}
 	else{
-		console.log(info);
-		return (<div>
-				<h1> Profile of {info.name}</h1>
-				<h2> Contact information: {info.email}</h2>
-				</div>
-				);
+    console.log(info)
+    const classes = [];
+    for(var i = 0; i < info.classes.length; i++){
+        classes[i] = [info.classes[i]];
+    }
+    console.log(classes);
+    return (
+        <Grid
+          data={
+              classes
+          }
+          columns={['Class']}
+          search={true}
+          pagination={{
+            enabled: true,
+            limit: 10,
+          }}
+        />
+    );
 	}
 }
 
