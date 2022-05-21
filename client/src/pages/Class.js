@@ -10,7 +10,7 @@ const ClassPage = () => {
 	const [info, setClassInfo] = useState(null);
 
 	useEffect(() => {
-		fetch('http://localhost:3001/class_display', {
+		fetch('/class_display', {
 			   method: 'POST',
 			   headers: {
 			     'Content-Type': 'application/json'

@@ -4,7 +4,7 @@ import { Outlet, Link } from "react-router-dom";
 
 async function lookUpClasses(params){
  console.log(params)
- return fetch('http://localhost:3001/class_search', {
+ return fetch('/class_search', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json'
