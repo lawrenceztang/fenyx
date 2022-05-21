@@ -54,6 +54,14 @@ const classes = [
 app.use(cors());
 app.use(bodyParser.json())
 
+app.use(express.static('client/build'));
+
+// Express serve up index.html file if it doesn't recognize route
+const path = require('path');
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+
 app.use('/login', (req, res) => {
   console.log(req.body);
   const email = req.body.email;
