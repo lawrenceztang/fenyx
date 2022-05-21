@@ -17,12 +17,15 @@ const db = new sqlite3.Database(db_name, err => {
   console.log("Successful connection to the database 'courses.db'");
 });
 
+var 
 var users = [];
 
 userLookup.getUsers(db).then((result) => {
     users = result;
+    console.log('returned users: ' + users)
 });
 
+console.log('users: ' + users)
 const classes = [
   {
     id: 0,
@@ -53,7 +56,7 @@ app.use('/login', (req, res) => {
   users.push({email: req.body.email, password: req.body.password})
   res.send({
     token: 'test123',
-    id: 2
+    id: 74334 
   });
 });
 
