@@ -13,6 +13,7 @@ import ClassPage from './pages/Class'
 
 function App() {
   const {token, setToken, deleteToken} = useToken();
+  console.log(token)
 
   // if(!token) {
   //   return <Login setToken={setToken} />
