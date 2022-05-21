@@ -12,32 +12,15 @@ const addUser = (db, inputs) => {
 }   
 
 const getUsers = (db) => {
-    const query_string = "SELECT * FROM users";
-    db.run(query_string, (err, row) => {
-        if(err) {
-            return console.log(err.message); 
-        }
-        console.log(row);
+    return new Promise((resolve, reject) => {
+        var search_results = [];
+        var sql = "SELECT * FROM users";
+        return db.each(sql, (error, row) => {
+            search_results.push(row);
+        }, () => {resolve(search_results)});
+
     })
-	return(
-			  [
-				  {
-				    id: 1,
-				    name: "William Wang",
-				    email: "william@uchicago.edu",
-				    password: "123456",
-				    classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
-				  },
-				  {
-				    id: 2,
-				    name: "Oliver",
-				    email: "william@uchicago.edu",
-				    password: "123456",
-				    classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
-				  }
-			]
-		)
 }
 
-module.exports.getUsers = getUsers
 module.exports.addUser = addUser
+module.exports.test = getUsers 
