@@ -87,23 +87,30 @@ app.use('/class_search',(req, res) => {
 
 app.use('/profile', (req, res) => {
   console.log(req.body);
-  user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
-  if(user){
-    res.send({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      classes: user.classes
-    })
-  }
-  else{
-    res.send({
-      id: null,
-      name: null,
-      email: null,
-      classes: null
-    })
-  }
+  userLookup.getUsers(db).then((result) => {
+      users = result;
+      user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
+      userLookup.getClasses(db, user).then((result) => {
+          classes = result;
+          console.log(classes)
+          if(user){
+            res.send({
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              classes: classes
+            })
+          }
+          else{
+            res.send({
+              id: null,
+              name: null,
+              email: null,
+              classes: null
+            })
+          }
+      });
+  });
 })
 
 app.use('/add_user', (req, res) => {
