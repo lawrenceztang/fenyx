@@ -31,6 +31,10 @@ const Profile = () => {
     }
     console.log(classes);
     return (
+    <div>
+        <button onClick={console.log('hello')} class={"py-2 mb-4 px-4 border rounded-md text-white bg-blue-600"}>
+            Add Class 
+        </button>
         <Grid
           data={
               classes
@@ -42,6 +46,7 @@ const Profile = () => {
             limit: 10,
           }}
         />
+    </div>
     );
 	}
 }

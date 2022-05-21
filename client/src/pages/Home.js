@@ -3,6 +3,7 @@ import { Outlet, Link } from "react-router-dom";
 
 
 async function lookUpClasses(params){
+ console.log(params)
  return fetch('http://localhost:3001/class_search', {
    method: 'POST',
    headers: {
@@ -35,9 +36,11 @@ const Home = () =>{
 
 	const handleSubmit = async e => {
 	    e.preventDefault();
+        console.log(search_input);
 	    const result = await lookUpClasses({
 	      search_input
 	    });
+        console.log(result);
 	    setResult(result.classes);
 	  };
 

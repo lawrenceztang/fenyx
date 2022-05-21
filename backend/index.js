@@ -17,22 +17,12 @@ const db = new sqlite3.Database(db_name, err => {
   console.log("Successful connection to the database 'courses.db'");
 });
 
-const users = [
-  {
-    id: 1,
-    name: "William Wang",
-    email: "william@uchicago.edu",
-    password: "123456",
-    classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
-  },
-  {
-    id: 2,
-    name: "Oliver",
-    email: "william@uchicago.edu",
-    password: "123456",
-    classes: ["CMSC 15200", "CMSC 15400", "CMSC 22000","CMSC 30000"]
-  }
-];
+var users = [];
+
+userLookup.getUsers(db).then((result) => {
+    users = result;
+});
+
 const classes = [
   {
     id: 0,
@@ -97,7 +87,7 @@ following class info:
 }
 */
 app.use('/class_search',(req, res) => {
-  console.log(req.body);
+  console.log(req.body.search_input);
   courseLookup.getSearchQuery(db, req.body.search_input)
   .then((result) =>{
     console.log(result);
@@ -128,6 +118,18 @@ app.use('/profile', (req, res) => {
     })
   }
 })
+
+app.use('/add_user', (req, res) => {
+   userLookup.addUser(db,req.body.inputs)
+   userLookup.getUsers(db).then((result) => {
+       users = result;
+   });
+})
+
+app.use('/add_classes', (req, res) => {
+   userLookup.addClasses(db,req.body.inputs)
+})
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
