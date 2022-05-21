@@ -55,11 +55,13 @@ app.use(cors());
 app.use(bodyParser.json())
 
 app.use('/login', (req, res) => {
+  console.log(req.body);
+  const email = req.body.email;
   userLookup.getUsers(db).then((result) => {
       users = result;
-      console.log("Current users:" + users.map( x => [x.email, x.password]));
-      console.log(req.body);
-      users.push({email: req.body.email, password: req.body.password})
+      console.log(email);
+      //console.log("Current users:" + users.map( x => [x.email, x.password]));
+      //users.push({email: req.body.email, password: req.body.password})
       res.send({
         token: hash(email),
       });
@@ -67,15 +69,17 @@ app.use('/login', (req, res) => {
 });
 
 app.use('/class_display', (req, res) => {
-  console.log("Request Information: " + req.body.id);
-  courseLookup.getClassDetails(db, req.body.id)
-  .then((result) => {
-    console.log("Express receives: " + JSON.stringify(result) );
-      res.send({
-      class_info: result,
-      users: users
-    })
-  })
+  userLookup.getUsers(db).then((result) => {
+      console.log("Request Information: " + req.body.id);
+      courseLookup.getClassDetails(db, req.body.id)
+      .then((result) => {
+        console.log("Express receives: " + JSON.stringify(result) );
+          res.send({
+          class_info: result,
+          users: users
+        })
+      })
+  });
   // let target = classes.filter(x => (x.id == req.body.id))[0];
   // console.log(target);
   // let target_users = users.filter(x => (target.users.includes(x.id)));
