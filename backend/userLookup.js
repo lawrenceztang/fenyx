@@ -1,4 +1,24 @@
-const getUsers = () => {
+const addUser = (db, inputs) => {
+    console.log(inputs);
+    const query_string = 'INSERT INTO users(id, name, email, password, classes) VALUES(?,?,?,?,?)';
+    const data = [Date.now(), inputs.name, inputs.email, inputs.password, ""];
+    console.log(data);
+    db.run(query_string, data, (err) => {
+        if(err) {
+            return console.log(err.message); 
+        }
+        console.log('Row was added to the table: ${this.lastID}');
+    })
+}   
+
+const getUsers = (db) => {
+    const query_string = "SELECT * FROM users";
+    db.run(query_string, (err, row) => {
+        if(err) {
+            return console.log(err.message); 
+        }
+        console.log(row);
+    })
 	return(
 			  [
 				  {
@@ -20,3 +40,4 @@ const getUsers = () => {
 }
 
 module.exports.getUsers = getUsers
+module.exports.addUser = addUser

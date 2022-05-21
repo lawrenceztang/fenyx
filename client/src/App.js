@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Layout from "./pages/Layout";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
 import Login from "./pages/Login";
 import { useState } from 'react';
 import useToken from './useToken';
@@ -25,6 +26,7 @@ function App() {
           <Route path="profile/:id" element={<Profile/>} />
           <Route path="login" element={<Login setToken={setToken}/>} />
           <Route path= "class/:id" element={<ClassPage/>} />
+          <Route path= "register" element={<Register/>} />
         </Route>
       </Routes>
     </BrowserRouter>

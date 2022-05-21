@@ -16,7 +16,7 @@ const db = new sqlite3.Database(db_name, err => {
   }
   console.log("Successful connection to the database 'courses.db'");
 });
-
+userLookup.getUsers(db);
 const users = [
   {
     id: 1,
@@ -127,6 +127,10 @@ app.use('/profile', (req, res) => {
       classes: null
     })
   }
+})
+
+app.use('/add_user', (req, res) => {
+   userLookup.addUser(db,req.body.inputs)
 })
 
 app.listen(port, () => {
