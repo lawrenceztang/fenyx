@@ -37,7 +37,7 @@ const getSearchQuery = (db, query) => {
 			if( dist <= min_distance){
 				console.log("Course: " + row.title + "Id:  " + row.index);
 				search_results.push({
-					id: row.index,
+					id: row.sectionID,
 					class_title: row.title,
 					class_num: row.num,
 					instructors: row.fullNameInstructors,
@@ -51,7 +51,8 @@ const getSearchQuery = (db, query) => {
 }
 //returns course information matching index
 const getClassDetails = (db,id) => {
-	var sql = "SELECT * FROM courses WHERE `index` = 0";
+	console.log('id: ', id);
+	var sql = "SELECT * FROM courses WHERE sectionID = " + id;
 	return new Promise((resolve,reject) => {
 			db.get(sql, (error, row) => {
 			if(error) {

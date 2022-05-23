@@ -44,19 +44,14 @@ app.get('*', (req, res) => {
 app.use('/login', (req, res) => {
   console.log(req.body);
   const email = req.body.email;
-  userLookup.getUsers(db).then((result) => {
-      users = result;
-      console.log(email);
-      //console.log("Current users:" + users.map( x => [x.email, x.password]));
-      //users.push({email: req.body.email, password: req.body.password})
-      res.send({
-        token: hash(email),
-      });
-  });
+  console.log(email);
+  const password = req.body.password
+  res.send({'token':hash(email)});
 });
 
 app.use('/class_display', (req, res) => {
   userLookup.getUsers(db).then((result) => {
+      users = result;
       console.log("Request Information: " + req.body.id);
       courseLookup.getClassDetails(db, req.body.id)
       .then((result) => {
@@ -100,23 +95,30 @@ app.use('/class_search',(req, res) => {
 
 app.use('/profile', (req, res) => {
   console.log(req.body);
-  user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
-  if(user){
-    res.send({
-      id: user.id,
-      name: user.name,
-      email: user.email,
-      classes: user.classes
-    })
-  }
-  else{
-    res.send({
-      id: null,
-      name: null,
-      email: null,
-      classes: null
-    })
-  }
+  userLookup.getUsers(db).then((result) => {
+    users = result;
+    user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
+    userLookup.getClasses(db, user).then((result) => {
+        classes = result;
+        console.log(classes)
+        if(user){
+          res.send({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            classes: classes
+          })
+        }
+        else{
+          res.send({
+            id: null,
+            name: null,
+            email: null,
+            classes: null
+          })
+        }
+    });
+  });
 })
 
 app.use('/add_user', (req, res) => {
@@ -127,7 +129,8 @@ app.use('/add_user', (req, res) => {
 })
 
 app.use('/add_classes', (req, res) => {
-   userLookup.addClasses(db,req.body.inputs)
+   const payload = {"id": req.body.info.id, "classes": req.body.info.class_info.sectionID +','}
+   userLookup.addClasses(db,payload);
 })
 
 const port = process.env.PORT || 5000;
