@@ -2,6 +2,17 @@ import {useParams} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Outlet, Link } from "react-router-dom";
 
+async function addClassToDB(params){
+ console.log(params)
+ return fetch('http://localhost:3001/add_classes', {
+   method: 'POST',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(params)
+ })
+   .then(data => data.json())
+}
 
 const ClassPage = () => {
 	let {id} = useParams();
