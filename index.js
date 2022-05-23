@@ -30,27 +30,6 @@ const db = new sqlite3.Database(db_name, err => {
   console.log("Successful connection to the database 'courses.db'");
 });
 
-const classes = [
-  {
-    id: 0,
-    name: "CMSC 15200",
-    professor: "Zach Barnes",
-    users: [1]
-  },
-  {
-    id: 1,
-    name: "CMSC 15200",
-    professor: "Bach Barnes",
-    users: [1]
-  },
-  {
-    id: 2,
-    name: "CMSC 22000",
-    professor: "Blase Ur",
-    users: [1]
-  }
-];
-
 app.use(cors());
 app.use(bodyParser.json())
 
