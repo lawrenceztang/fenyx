@@ -2,6 +2,8 @@ import {useParams} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Outlet, Link } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
+import { Grid } from 'gridjs-react';
+import { html } from 'gridjs';
 
 async function addClassToDB(params){
  console.log(params)
@@ -126,18 +128,24 @@ const ClassPage = () => {
 	if(sessionStorage.token == null)
     {
         console.log("not logged in");
-        class_info = info.class_info;
-        users = info.users;
-        return (<div>
-                    <h1> {info.class_info.title} </h1>
-                    <ul>
-                        {users.map(x =>
-                            <li key={x.id}><Link to={"/profile/" + x.id}>
-                            {x.name}
-                            </Link> </li>)}
-                    </ul>
-                </div>
-                );
+        console.log("Class Info: " + JSON.stringify(info.class_info) );
+		class_info = info.class_info;
+		users = info.users;
+		return (
+			<div>
+				<h1> {info.class_info.title} </h1>
+				<h3> {info.class_info.fullNameInstructors} </h3>
+				<div>{info.class_info.descrip}</div>
+				<form onSubmit={handleSubmit} method="post">
+                        <button type="submit">Add class</button>
+                </form>
+				<div>
+					<h2>People</h2>
+					<PeopleTable people={users}/>
+					<Chart gradeData={class_info.grades}/>
+				</div>
+			</div>
+		)
 
     }
 	else{
