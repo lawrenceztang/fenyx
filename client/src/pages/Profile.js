@@ -41,14 +41,14 @@ const Profile = () => {
               <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center",
                                        justifyContent: "space-around"}}>
                           {classes.map(x =>
-                              <div key={x.id} style={{margin: "1%", minWidth: "75%"}}
+                              <div key={x.sectionID} style={{margin: "1%", minWidth: "75%"}}
                                        class="container-md card">
-                                  <Link to={"http://localhost:3000/class/" + x.id}>
+                                  <Link to={"/class/" + x.sectionID}>
                                   {"CMSC " + x.num + " "+ x.title}</Link>
                                   <p>
                                   {"Instructors: " + x.instructors}
                                   </p>
-                                  {(x.cross_listings != 'None') &&
+                                  {(x.crossListings != 'None') &&
                                   <p> {"Cross Listed as: " + x.crossListings}
                                   </p>
                                  }
