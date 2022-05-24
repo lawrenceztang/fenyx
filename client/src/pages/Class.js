@@ -81,13 +81,15 @@ export const PeopleTable = props => {
 				data={
 					props.people.map(x =>
 						[
-							html("<a href='/profile/'" + x.id + ">" + x.name + "</Link>"),
-							x.year
+							html("<a href='/profile/" + x.id + "'>" + x.name + "</Link>"),
+							x.graduation_year,
+							x.major
 						]			
 					)
 				}
-				columns={['Name', 'Year']}
+				columns={['Name', 'Graduation Year', 'Major']}
 				search={true}
+				sort={true}
 				pagination={{
 					enabled: false,
 					limit: 1,
@@ -131,6 +133,7 @@ const ClassPage = () => {
         console.log("Class Info: " + JSON.stringify(info.class_info) );
 		class_info = info.class_info;
 		users = info.users;
+		console.log(users);
 		return (
 			<div>
 				<h1> {info.class_info.title} </h1>

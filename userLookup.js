@@ -23,9 +23,9 @@ function get_suffix(classes){
 
 const addUser = (db, inputs) => {
     console.log(inputs);
-    const query_string = 'INSERT INTO users(id, name, email, password, classes) VALUES(?,?,?,?,?)';
+    const query_string = 'INSERT INTO users(id, name, email, password, graduation_year, major, classes) VALUES(?,?,?,?,?,?,?)';
     const id = hash(inputs.email);
-    const data = [id, inputs.name, inputs.email, inputs.password, ""];
+    const data = [id, inputs.name, inputs.email, inputs.password, inputs.graduation_year, inputs.major, ""];
     console.log(data);
     db.run(query_string, data, (err) => {
         if(err) {
@@ -58,7 +58,10 @@ const getUsers = (db) => {
 }
 
 const getClasses = (db, user) => { 
-    const class_string = user.classes;
+    var class_string = user.classes;
+    if(class_string == null) {
+        class_string = "";
+    }
     const classes = class_string.split(",");
     console.log(classes);
     return new Promise((resolve, reject) => {

@@ -30,22 +30,17 @@ const Register = () => {
 
     return (
         <form onSubmit={handleSubmit}>
-          <label>
-            Name:
-            <input type="text" name="name" value={inputs.name} onChange={handleChange}/>
-          </label>
+          <input style={{left: "50%", float: "center"}} type="text" name="name" value={inputs.name} placeholder="Name" required onChange={handleChange}/>
           <br></br>
-          <label>
-            Email:
-            <input type="text" name="email" value={inputs.email} onChange={handleChange}/>
-          </label>
+          <input style={{left: "50%", float: "center"}} type="text" name="year" value={inputs.graduation_year} placeholder="Graduation Year" required onChange={handleChange}/>
           <br></br>
-          <label>
-            Password:
-            <input type="text" name="password" value={inputs.pass}  onChange={handleChange}/>
-          </label>
+          <input style={{left: "50%", float: "center"}} type="text" name="major" value={inputs.major} placeholder="Major" onChange={handleChange}/>
           <br></br>
-          <input type="submit" value="Submit" />
+          <input style={{left: "50%", float: "center"}} type="text" name="email" value={inputs.email} placeholder="Email" required onChange={handleChange}/>
+          <br></br>
+          <input style={{left: "50%", float: "center"}} type="text" name="password" value={inputs.pass} placeholder="Password" required onChange={handleChange}/>
+          <br></br>
+          <input style={{left: "50%", float: "center"}} type="submit" value="Submit" />
         </form>
     ); 
 }
