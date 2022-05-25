@@ -35,6 +35,8 @@ const Profile = () => {
             <div>
               <div>
                   <h1>{info.name}</h1>
+                  <h2>Graduation Year: {info.graduation_year}</h2>
+                  <h2>Major: {info.major}</h2>
                   <h2>Email: {info.email}</h2>
 
               </div>
