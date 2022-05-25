@@ -114,7 +114,7 @@ const ClassPage = () => {
 	//Add in class data for info
 	const handleSubmit = async e => {
          e.preventDefault();
-         info.id = JSON.parse(sessionStorage.token).token;
+         info.id = JSON.parse(sessionStorage.token)
          const result = await addClassToDB({
             info
          });

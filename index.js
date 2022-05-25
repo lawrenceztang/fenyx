@@ -136,6 +136,8 @@ app.use('/add_user', (req, res) => {
 
 app.use('/add_classes', (req, res) => {
    const payload = {"id": req.body.info.id, "classes": req.body.info.class_info.sectionID +','}
+   console.log("req:" + JSON.stringify(req.body.info) );
+   console.log("Payload: " + payload);
    userLookup.addClasses(db,payload);
 })
 
