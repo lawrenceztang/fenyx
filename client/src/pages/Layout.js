@@ -1,10 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import { useState } from 'react';
 import bird from "../fenix.png"
 
 
 
 const Layout = ({token, deleteToken}) => {
   let authorizations;
+  const [refresh_token, setRefresh] = useState(0)
   if(!token){
             authorizations= <Link to="/login">Login/Register</Link>
           }
@@ -29,17 +31,18 @@ const Layout = ({token, deleteToken}) => {
          <li class="nav-item">
             <Link to="/" class="nav-link">Home</Link>
           </li>
-          {token && 
+          {sessionStorage.getItem("token") && 
             <li class="nav-item">
-              <Link to={"/profile/" + token} class="nav-link">My Profile</Link>
+              <Link to={"/profile/" + sessionStorage.getItem('token')} class="nav-link" 
+              onClick={() => window.location.href="/profile/" + sessionStorage.getItem('token')}>My Profile</Link>
             </li>
           }
-          {token && 
+          {sessionStorage.getItem("token") && 
             <li class = "nav-item">
               <Link to="/" onClick={deleteToken} class="nav-link">Sign Out</Link>
             </li>
           }
-          {!token && 
+          {!sessionStorage.getItem("token") && 
             <li class="nav-item">
               <Link to="/login" class="nav-link">Login/Register</Link>
             </li>

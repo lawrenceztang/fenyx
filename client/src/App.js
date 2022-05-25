@@ -26,9 +26,9 @@ function App() {
         <Route exact path="/" element={<Layout token={token} deleteToken={deleteToken}/>}>
           <Route index element={<Home />} />
           <Route path="profile/:id" element={<Profile/>} />
-          <Route path="login" element={<Login setToken={setToken}/>} />
+          <Route path="login" element={<Login token={token} setToken={setToken}/>} />
           <Route path= "class/:id" element={<ClassPage/>} />
-          <Route path= "register" element={<Register/>} />
+          <Route path= "register" element={<Register token={token} setToken={setToken}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -94,7 +94,7 @@ app.use('/class_search',(req, res) => {
 });
 
 app.use('/profile', (req, res) => {
-  console.log(req.body);
+  console.log("Trying to get profile:" + req.body.id);
   userLookup.getUsers(db).then((result) => {
     users = result;
     user = users.filter(x => (x.id == parseInt(req.body.id)))[0];
@@ -128,7 +128,9 @@ app.use('/profile', (req, res) => {
 app.use('/add_user', (req, res) => {
    userLookup.addUser(db,req.body.inputs)
    userLookup.getUsers(db).then((result) => {
-       users = result;
+       console.log(result)
+       hash_code = result.filter(user => user.email == req.body.inputs.email)[0].id;
+       res.send({'token': hash_code});
    });
 })
 

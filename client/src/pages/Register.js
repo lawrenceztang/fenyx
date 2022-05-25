@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import ReactDOM from 'react-dom/client';
+import { useNavigate } from "react-router-dom";
 
 async function registerUser(params){
  console.log(params)
@@ -13,13 +14,16 @@ async function registerUser(params){
    .then(data => data.json())
 }
 
-const Register = () => {
+const Register = ({token,setToken}) => {
     const [inputs, setInputs] = useState({});
+    const history = useNavigate()
     const handleSubmit = async e => {
          e.preventDefault();
          const result = await registerUser({
              inputs
-         });
+         })
+         setToken(result);
+         history("/");
     };
 
     const handleChange = (event) => {
