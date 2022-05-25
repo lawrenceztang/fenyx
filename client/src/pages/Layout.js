@@ -34,7 +34,7 @@ const Layout = ({token, deleteToken}) => {
           {sessionStorage.getItem("token") && 
             <li class="nav-item">
               <Link to={"/profile/" + sessionStorage.getItem('token')} class="nav-link" 
-              onClick={() => window.location.href="/profile/" + sessionStorage.getItem('token')}>My Profile</Link>
+              onClick={() => window.location.href="/profile/" + parseInt(sessionStorage.getItem('token'))}>My Profile</Link>
             </li>
           }
           {sessionStorage.getItem("token") && 
