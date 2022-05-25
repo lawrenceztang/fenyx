@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import PropTypes from 'prop-types';
 
 async function loginUser(credentials) {
+console.log(credentials.token);
  return fetch('/login', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json'
    },
-   body: JSON.stringify(credentials.token)
+   body: JSON.stringify(credentials)
  })
    .then(data => data.json())
 }
