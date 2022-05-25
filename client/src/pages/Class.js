@@ -46,7 +46,7 @@ export const Chart = (gradeData) => {
     }
 	return (
 		<div style={{marginLeft: "50%"}}>
-			<h3 style={{textAlign: "center"}}>Grade Distribution</h3>
+			<h3 style={{textAlign: "center", color: "whitesmoke"}}>Grade Distribution</h3>
 			<Bar data={chartData} redraw={true} options={{
 				plugins: {
 					legend: {
@@ -56,7 +56,7 @@ export const Chart = (gradeData) => {
 				scales: {
 					y: {  // not 'yAxes: [{' anymore (not an array anymore)
 					  ticks: {
-						color: "black",
+						color: "white",
 						font: {
 						  size: 15
 						},
@@ -64,7 +64,7 @@ export const Chart = (gradeData) => {
 					},
 					x: {  // not 'xAxes: [{' anymore (not an array anymore)
 					  ticks: {
-						color: "black",
+						color: "white",
 						font: {
 						  size: 30
 						},
@@ -170,7 +170,7 @@ const ClassPage = () => {
                     <input type="submit" id="submitClass" style={{display:"none"}} value="Add"/>
                 </form>
 				<div>
-					<h2>People</h2>
+					<h2 style={{color:"whitesmoke"}}>People</h2>
 					<PeopleTable people={users}/>
 					<Chart gradeData={class_info.grades}/>
 				</div>
