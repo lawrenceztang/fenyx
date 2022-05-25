@@ -9,7 +9,7 @@ import Chat from '../components/Chat'
 
 async function addClassToDB(params){
  console.log(params)
- return fetch('http://localhost:3001/add_classes', {
+ return fetch('/add_classes', {
    method: 'POST',
    headers: {
      'Content-Type': 'application/json'
