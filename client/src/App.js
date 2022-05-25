@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import { useState } from 'react';
 import useToken from './useToken';
 import ClassPage from './pages/Class'
+import Chat from './components/Chat'
+import Messaging from './components/Chat2';
 
 
 function App() {

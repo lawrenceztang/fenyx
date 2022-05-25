@@ -105,6 +105,8 @@ app.use('/profile', (req, res) => {
           res.send({
             id: user.id,
             name: user.name,
+            graduation_year: user.graduation_year,
+            major: user.major,
             email: user.email,
             classes: classes
           })
@@ -113,6 +115,8 @@ app.use('/profile', (req, res) => {
           res.send({
             id: null,
             name: null,
+            graduation_year: null,
+            major: null,
             email: null,
             classes: null
           })

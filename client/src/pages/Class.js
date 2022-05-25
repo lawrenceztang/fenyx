@@ -1,9 +1,11 @@
 import {useParams} from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { Outlet, Link } from "react-router-dom";
+import ReactDOM from 'react-dom';
 import { Bar } from "react-chartjs-2";
 import { Grid } from 'gridjs-react';
 import { html } from 'gridjs';
+import Chat from '../components/Chat'
 
 async function addClassToDB(params){
  console.log(params)
@@ -99,12 +101,17 @@ export const PeopleTable = props => {
 	);
 }
 
+function showAddClass() {
+	document.getElementById('grade').style.display = "block";
+	document.getElementById('submitClass').style.display = "block";
+ }
+
 const ClassPage = () => {
 	let {id} = useParams();
 	let class_info;
 	let users;
 	const [info, setClassInfo] = useState(null);
-
+	//Add in class data for info
 	const handleSubmit = async e => {
          e.preventDefault();
          info.id = JSON.parse(sessionStorage.token).token;
@@ -139,9 +146,6 @@ const ClassPage = () => {
 				<h1> {info.class_info.title} </h1>
 				<h3> {info.class_info.fullNameInstructors} </h3>
 				<div>{info.class_info.descrip}</div>
-				<form onSubmit={handleSubmit} method="post">
-                        <button type="submit">Add class</button>
-                </form>
 				<div>
 					<h2>People</h2>
 					<PeopleTable people={users}/>
@@ -149,7 +153,6 @@ const ClassPage = () => {
 				</div>
 			</div>
 		)
-
     }
 	else{
 		console.log("Class Info: " + JSON.stringify(info.class_info) );
@@ -160,8 +163,11 @@ const ClassPage = () => {
 				<h1> {info.class_info.title} </h1>
 				<h3> {info.class_info.fullNameInstructors} </h3>
 				<div>{info.class_info.descrip}</div>
+				
+				<input type="button" value="Add Class" onClick={showAddClass}/>
 				<form onSubmit={handleSubmit} method="post">
-                        <button type="submit">Add class</button>
+					<input type="text" id="grade" style={{display:"none"}} placeholder="Grade"/>
+                    <input type="submit" id="submitClass" style={{display:"none"}} value="Add"/>
                 </form>
 				<div>
 					<h2>People</h2>
@@ -169,8 +175,8 @@ const ClassPage = () => {
 					<Chart gradeData={class_info.grades}/>
 				</div>
 			</div>
+						
 		)
 	}
 };
-
 export default ClassPage;
