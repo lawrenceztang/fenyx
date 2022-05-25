@@ -34,10 +34,10 @@ const Profile = () => {
       return (
             <div>
               <div>
-                  <h1>{info.name}</h1>
-                  <h2>Graduation Year: {info.graduation_year}</h2>
-                  <h2>Major: {info.major}</h2>
-                  <h2>Email: {info.email}</h2>
+                  <h1 style={{color:"whitesmoke"}}>{info.name}</h1>
+                  <h2 style={{color:"whitesmoke"}}>Graduation Year: {info.graduation_year}</h2>
+                  <h2 style={{color:"whitesmoke"}}>Major: {info.major}</h2>
+                  <h2 style={{color:"whitesmoke"}}>Email: {info.email}</h2>
 
               </div>
               <div style={{display: "flex", width: "100%", flexDirection: "column", alignItems: "center",

@@ -1,5 +1,5 @@
 import { Outlet, Link } from "react-router-dom";
-
+import bird from "../fenix.png"
 
 
 
@@ -14,7 +14,12 @@ const Layout = ({token, deleteToken}) => {
           }
 
   return(
-    <div style={{height: "93vh"}}>
+    <div style={{minHeight: "100vh",
+                 backgroundImage: 'url(' + require('../fenix.png') + ')',
+                 backgroundAttachment: "scroll",
+                 backgroundPosition: "center",
+                 backgroundRepeat: "no-repeat",
+                 backgroundSize: "cover"}}>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <div class="container-fluid">
         <ul class="navbar-nav">

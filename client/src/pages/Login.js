@@ -73,12 +73,11 @@ const Login = ({token, setToken}) => {
 		<div style={{width: "50%"}}>
 		</div>
 		<div class="col-sm-6 text-black" style={{display: "flex", flexDirection: "column",
-																							justifyContent: "center", height: "100%",
+																							justifyContent: "center", height: "93vh",
 																							background: "white"} }>
 
         <div class="px-5 ms-xl-4">
           <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style={{color: "#709085"} }></i>
-          <span class="h1 fw-bold mb-0">Logo</span>
         </div>
 
         <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">

@@ -60,7 +60,7 @@ const Home = () =>{
 	return (<div style={container}>
 				{!search_result && 
 				<div id="title" style={header}>
-					<h1>Fenyx</h1>
+					<h1 style={{color: "whitesmoke"}}>Fenyx</h1>
 				</div>
 			  }
 			  {search_result && 

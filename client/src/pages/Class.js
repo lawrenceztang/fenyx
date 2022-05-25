@@ -143,11 +143,11 @@ const ClassPage = () => {
 		console.log(users);
 		return (
 			<div>
-				<h1> {info.class_info.title} </h1>
-				<h3> {info.class_info.fullNameInstructors} </h3>
-				<div>{info.class_info.descrip}</div>
+				<h1 style={{color:"whitesmoke"}}> {info.class_info.title} </h1>
+				<h3 style={{color:"whitesmoke"}}> {info.class_info.fullNameInstructors} </h3>
+				<div style={{color:"whitesmoke"}}>{info.class_info.descrip}</div>
 				<div>
-					<h2>People</h2>
+					<h2 style={{color:"whitesmoke"}}>People</h2>
 					<PeopleTable people={users}/>
 					<Chart gradeData={class_info.grades}/>
 				</div>
@@ -160,9 +160,9 @@ const ClassPage = () => {
 		users = info.users;
 		return (
 			<div>
-				<h1> {info.class_info.title} </h1>
-				<h3> {info.class_info.fullNameInstructors} </h3>
-				<div>{info.class_info.descrip}</div>
+				<h1 style={{color:"whitesmoke"}}> {info.class_info.title} </h1>
+				<h3 style={{color:"whitesmoke"}}> {info.class_info.fullNameInstructors} </h3>
+				<div style={{color:"whitesmoke"}}>{info.class_info.descrip}</div>
 				
 				<input type="button" value="Add Class" onClick={showAddClass}/>
 				<form onSubmit={handleSubmit} method="post">
