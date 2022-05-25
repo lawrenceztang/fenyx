@@ -29,7 +29,8 @@ const getSearchQuery = (db, query) => {
 
 		//Input min_distance
 		return db.each(sql, (error, row) => {
-            const min_distance = 25/query.length + .95*(row.title.length - query.length) 
+            const min_distance = 30/query.length + .965*(row.title.length - query.length)
+      
             console.log(min_distance);
             console.log( levenshteinDistance(row.title, query))
 			if (error) {reject(error)};
@@ -42,7 +43,8 @@ const getSearchQuery = (db, query) => {
 					class_num: row.num,
 					instructors: row.fullNameInstructors,
 					cross_listings: row.crossListings,
-					quarter: row.quarter
+					quarter: row.quarter,
+					section_id: row.sectionID
 				});
 			}
 		}, () => {resolve(search_results)});

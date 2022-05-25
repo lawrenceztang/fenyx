@@ -84,9 +84,9 @@ const Home = () =>{
 								<div key={x.id} style={{margin: "1%", minWidth: "75%"}}
 										 class="container-md card">
 									<Link to={"/class/" + x.id}> 
-									{"CMSC " + x.class_num + " "+ x.class_title}</Link>
+									{"CMSC " + x.class_num + " "+ x.class_title + " Section: " + x.section_id}</Link>
 									<p>
-									{"Instructors: " + x.instructors}
+									{"Instructors: " + x.instructors + ", Quarter: " + x.quarter}
 									</p>
 									{(x.cross_listings != 'None') && 
 									<p> {"Cross Listed as: " + x.cross_listings}
