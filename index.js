@@ -18,7 +18,7 @@ function hash(s){
         hash_val %= p2;
     }
     return hash_val
-}
+} 
 
 //database path
 db_name = './courses.db';
@@ -42,11 +42,21 @@ app.get('*', (req, res) => {
 });
 
 app.use('/login', (req, res) => {
-  console.log(req.body);
-  const email = req.body.email;
-  console.log(email);
-  const password = req.body.password
-  res.send({'token':hash(email)});
+  userLookup.getUsers(db).then((result) => {
+
+      user = result.filter(x => (x.email === req.body.email))[0];
+      console.log("Express receives: " + JSON.stringify(user) );
+        if (user){
+          res.send({
+            'token': hash(user.email)
+          })
+        }
+        else{
+            res.send({
+            'token': null
+          })
+        }
+      })
 });
 
 app.use('/class_display', (req, res) => {

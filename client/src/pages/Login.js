@@ -43,8 +43,13 @@ const Login = ({token, setToken}) => {
 	      email,
 	      password
 	    });
-	    setToken(token);
-	    history("/");
+	    if (token.token == null){
+	    	
+	    }
+	    else{
+	    	setToken(token);
+	    	history("/");
+	    }
 	  }
 
 	const handleEmailChange = (event) => {
