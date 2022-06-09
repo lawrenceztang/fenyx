@@ -17,7 +17,6 @@ const Layout = ({token, deleteToken}) => {
 
   return(
     <div style={{minHeight: "100vh",
-                 backgroundImage: 'url(' + require('../fenix.png') + ')',
                  backgroundAttachment: "scroll",
                  backgroundPosition: "center",
                  backgroundRepeat: "no-repeat",
